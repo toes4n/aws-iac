@@ -40,17 +40,17 @@ vpc_config = {
       az   = "ap-southeast-1b"
       route_table_name = "devops-rtb-private1-micro-ap-southeast-1b"
     }
-    "wso2-a" = {
+    "dev-a" = {
       cidr = "10.100.2.0/27"
-      name = "devops-subnet-private2-wso2-ap-southeast-1a"
+      name = "devops-subnet-private2-dev-ap-southeast-1a"
       az   = "ap-southeast-1a"
-      route_table_name = "devops-rtb-private2-wso2-ap-southeast-1a"
+      route_table_name = "devops-rtb-private2-dev-ap-southeast-1a"
     }
-    "wso2-b" = {
+    "dev-b" = {
       cidr = "10.100.5.0/27"
-      name = "devops-subnet-private2-wso2-ap-southeast-1b"
+      name = "devops-subnet-private2-dev-ap-southeast-1b"
       az   = "ap-southeast-1b"
-      route_table_name = "devops-rtb-private2-wso2-ap-southeast-1b"
+      route_table_name = "devops-rtb-private2-dev-ap-southeast-1b"
     }
     "elk-a" = {
       cidr = "10.100.3.0/27"
@@ -88,7 +88,7 @@ vpc_endpoints = {
 }
 
 # EKS Configuration
-eks_cluster_name = "devops-wso2-cluster"
+eks_cluster_name = "devops-cluster"
 eks_version      = "1.33"
 
 # EKS Endpoint Access Configuration
@@ -114,8 +114,8 @@ node_groups = {
       micro-node = "micro-node"
     }
   }
-  wso2 = {
-    name           = "wso2-node-group"
+  dev = {
+    name           = "dev-node-group"
     # instance_types = ["c5.xlarge"]
     instance_types = ["t3.medium"]
     capacity_type  = "ON_DEMAND"
@@ -124,11 +124,11 @@ node_groups = {
     desired_size   = 1
     disk_size      = 100
     ami_type       = "AL2023_x86_64_STANDARD"
-    subnet_keys    = ["wso2-a", "wso2-b"]
+    subnet_keys    = ["dev-a", "dev-b"]
     labels = {
-      wso2-apim = "wso2-apim"
-      wso2      = "wso2"
-      wso2-node = "wso2-node"
+      dev-apim = "dev-apim"
+      dev      = "dev"
+      dev-node = "dev-node"
     }
   }
   # elk = {
@@ -187,7 +187,7 @@ rds_config = {
 
 # Security Groups Configuration
 security_groups = {
-  eks_cluster_sg_name = "devops-wso2-cluster-sg"
+  eks_cluster_sg_name = "devops-dev-cluster-sg"
   rds_sg_name         = "devops-database-sg"
 }
 
@@ -204,13 +204,13 @@ efs_config = {
   provisioned_throughput = 0
   encrypted              = false
   enable_backup          = false
-  subnet_keys            = ["wso2-a", "wso2-b"]
+  subnet_keys            = ["dev-a", "dev-b"]
 }
 
 efs_access_points = {
-  wso2_log = {
-    name        = "wso2-log"
-    path        = "/wso2-log"
+  dev_log = {
+    name        = "dev-log"
+    path        = "/dev-log"
     uid         = 1000
     gid         = 1000
     permissions = "0755"
