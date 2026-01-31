@@ -1,6 +1,4 @@
-# Canal Plus Infrastructure
-
-This Terraform configuration creates AWS infrastructure for Canal Plus including VPC, EKS cluster, RDS database, and EFS storage using official AWS modules with comprehensive variable-based configuration.
+This Terraform configuration creates AWS infrastructure for including VPC, EKS cluster, RDS database, and EFS storage using official AWS modules with comprehensive variable-based configuration.
 
 ## Architecture Overview
 
